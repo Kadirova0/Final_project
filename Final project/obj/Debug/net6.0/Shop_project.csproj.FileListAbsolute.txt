@@ -1,0 +1,15 @@
+C:\Users\fatim\source\repos\Final project\Final project\bin\Debug\net6.0\Shop_project.exe
+C:\Users\fatim\source\repos\Final project\Final project\bin\Debug\net6.0\Shop_project.deps.json
+C:\Users\fatim\source\repos\Final project\Final project\bin\Debug\net6.0\Shop_project.runtimeconfig.json
+C:\Users\fatim\source\repos\Final project\Final project\bin\Debug\net6.0\Shop_project.dll
+C:\Users\fatim\source\repos\Final project\Final project\bin\Debug\net6.0\Shop_project.pdb
+C:\Users\fatim\source\repos\Final project\Final project\obj\Debug\net6.0\Shop_project.csproj.AssemblyReference.cache
+C:\Users\fatim\source\repos\Final project\Final project\obj\Debug\net6.0\Shop_project.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\fatim\source\repos\Final project\Final project\obj\Debug\net6.0\Shop_project.AssemblyInfoInputs.cache
+C:\Users\fatim\source\repos\Final project\Final project\obj\Debug\net6.0\Shop_project.AssemblyInfo.cs
+C:\Users\fatim\source\repos\Final project\Final project\obj\Debug\net6.0\Shop_project.csproj.CoreCompileInputs.cache
+C:\Users\fatim\source\repos\Final project\Final project\obj\Debug\net6.0\Shop_project.dll
+C:\Users\fatim\source\repos\Final project\Final project\obj\Debug\net6.0\refint\Shop_project.dll
+C:\Users\fatim\source\repos\Final project\Final project\obj\Debug\net6.0\Shop_project.pdb
+C:\Users\fatim\source\repos\Final project\Final project\obj\Debug\net6.0\Shop_project.genruntimeconfig.cache
+C:\Users\fatim\source\repos\Final project\Final project\obj\Debug\net6.0\ref\Shop_project.dll
