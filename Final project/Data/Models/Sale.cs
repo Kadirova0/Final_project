@@ -13,16 +13,14 @@ namespace Final_project.Data.Models
     {
         private static int count = 0;
 
-        public Sale(int id, decimal amount, SaleItem item, DateTime date)
+        public Sale(decimal amount, SaleItem item, DateTime date)
         {
-            Id = id;
             Amount = amount;
             Date = date;
 
             Id = count;
             count++;
         }
-        public int Id { get; set; }
         public decimal Amount { get; set; }
         public SaleItem Item { get; set; }
         public DateTime Date { get; set; }

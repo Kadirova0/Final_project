@@ -12,13 +12,12 @@ namespace Final_project.Data.Models
     {
         private static int count = 0;
 
-        public Product(string name, decimal price, Categories category, int numeral, int id ) 
+        public Product(string name, decimal price, Categories category, int quantity) 
         {
             Name = name;
             Price = price;
             Category = category;
-            Numeral = numeral;
-            Id = id;
+            Quantity = quantity;
 
             Id = count;
             count++;
@@ -26,8 +25,7 @@ namespace Final_project.Data.Models
         public string Name { get; set; }
         public decimal Price { get; set; }
         public Categories Category { get; set; }
-        public int Numeral { get; set; }
-        public int Id { get; set; }
-
+        public int Quantity { get; set; }
+        
     }
 }

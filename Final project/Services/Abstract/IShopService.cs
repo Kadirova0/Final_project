@@ -10,14 +10,9 @@ namespace Final_project.Services.Abstract
 {
     public interface IShopService
     {
-        public List<Product> GetProduct();
-        public int AddProduct(string name, decimal price, Categories category, int numeral, int id);
+      public List<Product> GetProducts();
+        public int AddProduct(string name,decimal price, Categories categories, int quantity);
         public void DeleteProduct(int id);
-        public void UpdateProduct(Product product);
 
-
-        public List<Sale> GetSale();
-        public int AddSale(int id, decimal amount, SaleItem item, DateTime date);
-        public void DeleteSale(int id);
     }
 }

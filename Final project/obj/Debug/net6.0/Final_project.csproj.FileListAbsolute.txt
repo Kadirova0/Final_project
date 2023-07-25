@@ -13,3 +13,5 @@ C:\Users\fatim\OneDrive\Masaüstü\Final project\Final project\obj\Debug\net6.0\
 C:\Users\fatim\OneDrive\Masaüstü\Final project\Final project\obj\Debug\net6.0\Final_project.pdb
 C:\Users\fatim\OneDrive\Masaüstü\Final project\Final project\obj\Debug\net6.0\Final_project.genruntimeconfig.cache
 C:\Users\fatim\OneDrive\Masaüstü\Final project\Final project\obj\Debug\net6.0\ref\Final_project.dll
+C:\Users\fatim\OneDrive\Masaüstü\Final project\Final project\bin\Debug\net6.0\ConsoleTables.dll
+C:\Users\fatim\OneDrive\Masaüstü\Final project\Final project\obj\Debug\net6.0\Final_project.csproj.CopyComplete

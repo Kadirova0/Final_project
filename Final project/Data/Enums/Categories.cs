@@ -9,8 +9,13 @@ namespace Final_project.Data.Enums
     public enum Categories
     {
         Food,
-        Drink,
-        Fruits,
-        Milk
+        Fruit,
+        Beverages,
+        Cereals,
+        DairyProduct,
+        Frozen,
+        Delicatessen,
+        NonFood,
+        HouseholdCleaning
     }
 }

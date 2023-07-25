@@ -12,17 +12,15 @@ namespace Final_project.Data.Models
     {
         private static int count = 0;
 
-        public SaleItem(int id, Product product, int numeral)
+        public SaleItem(Product product, int quantity)
         {
-            Id = id;
             Product = product;
-            Numeral = numeral;
+            Quantity = quantity;
 
             Id = count;
             count++;
         }
-        public int Id { get; set; }
         public Product Product { get; set; }
-        public int Numeral { get; set; }
+        public int Quantity { get; set; }
     }
 }

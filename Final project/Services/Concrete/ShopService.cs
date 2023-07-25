@@ -1,4 +1,5 @@
-﻿using Final_project.Data.Models;
+﻿using Final_project.Data.Enums;
+using Final_project.Data.Models;
 using Final_project.Services.Abstract;
 using System;
 using System.Collections.Generic;
@@ -8,96 +9,67 @@ using System.Threading.Tasks;
 
 namespace Final_project.Services.Concrete
 {
-    public class ShopService
-    {
-        public static void MenuShowAllProducts()
-        {
-        }
-        public static void MenuAddProduct()
-        {
-        }
-        public static void MenuDeleteProduct()
-        {
-        }
-        public static void MenuShowProductsByCategory()
-        {
-        }
-        public static void MenuShowProductsByPriceRnge()
-        {
-        }
-        public static void MenuCorrectionProduct()
-        {
-        }
-        public static void MenuSearchProductsByName()
-        {
-        }
+    public class ShopService : IShopService
+    { 
+        private List<Product> products;
+        private List<Sale> sales;
+        private List<SaleItem> saleItems;
 
 
-        public static void MenuShowAllSales()
-        {
+        public List<Product> GetProducts() 
+        { 
+            return products; 
+        } 
+        public List<Sale> GetSales() 
+        { 
+          return sales;
         }
-        public static void MenuAddSale()
-        {
+        public List <SaleItem> GetSaleItems()
+        { 
+            return saleItems;
         }
-        public static void MenuDeleteSale()
+
+        public ShopService() 
         {
+            products = new();
+            sales = new();
+            saleItems = new();
         }
-        public static void MenuReturnofAnyProductonSale()
+        public int AddProduct(string name, decimal price, Categories category, int quantity)
         {
+            if (string.IsNullOrWhiteSpace(name)) throw new Exception("Name is null!");
+            if (price < 0) throw new Exception("Price is negative!");
+            if (quantity < 0) throw new Exception("Quantity is negative");
+
+            var product = new Product(name, price, category, quantity);
+
+            products.Add(product);
+
+            return product.Id;  
         }
-        public static void MenuShowSalesByDate()
+
+        public void DeleteProduct(int id)
         {
+            if (id < 0) throw new Exception("Id is negative!");
+            int productIndex = products.FindIndex(x => x.Id == id);
+            if (productIndex == -1) throw new Exception("Product not found");
+            products.RemoveAt(productIndex);
         }
-        public static void MenuShowSalesByPriceRange()
+
+        public void UpdateProduct(int id, string name, decimal price, Categories category, int quantity)
         {
+            if (string.IsNullOrWhiteSpace(name)) throw new Exception("Name can't be empty!");
+            if (price < 0) throw new Exception("Price can't be negative!");
+            if (quantity < 0) throw new Exception("Quantity can't negative!");
+
+            var existingProduct = products.FirstOrDefault(x => x.Id == id);
+            if (existingProduct != null) throw new Exception("Product not found!");
+
+            existingProduct.Name = name;
+            existingProduct.Price = price;
+            existingProduct.Category = category;
+            existingProduct.Quantity = quantity;
+
         }
-        public static void MenuShowSalesonSpecificDate()
-        {
-        }
-        public static void MenuShowSalesIssuedUnderId()
-        {
-        }
-        public static void ShopSales()
-        {
-        }
-        public static void ShopProduct()
-        {
-        }
-        public static void ShopAddSale()
-        {
-        }
-        public static void ShopReturnofAnyProductonSale()
-        {
-        }
-        public static void ShopReturnofGeneralSale()
-        {
-        }
-        public static void ShophowSalesByDate()
-        {
-        }
-        public static void ShopShowSalesonSpecificDate()
-        {
-        }
-        public static void ShopShowSalesByPriceRange()
-        {
-        }
-        public static void ShopShowSalesIssuedUnderId()
-        {
-        }
-        public static void ShopAddProduct()
-        {
-        }
-        public static void ShopUpdateProduct()
-        {
-        }
-        public static void ShopShowProductsByCategory()
-        {
-        }
-        public static void ShopShowProductsByPriceRnge()
-        {
-        }
-        public static void ShopSearchProductsByName()
-        {
-        }
-    }
+    } 
 }

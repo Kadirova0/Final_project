@@ -1,6 +1,6 @@
 ﻿using Final_project.Helper;
 using System;
-namespace Shop_project
+namespace Final_project
 {
     public class Program
     {
@@ -12,14 +12,14 @@ namespace Shop_project
 
             do
             {
-                Console.WriteLine("1. Operation on products");
-                Console.WriteLine("2. Operation on sales");
+                Console.WriteLine("1. Operation on products: ");
+                Console.WriteLine("2. Operation on sales: ");
                 Console.WriteLine("0. Log out");
                 Console.WriteLine("---------------------------------");
                 Console.WriteLine("Please, select an option: ");
                 Console.WriteLine("---------------------------------");
 
-                while (int.TryParse(Console.ReadLine(), out option))
+                while (!int.TryParse(Console.ReadLine(), out option))
                 {
                     Console.WriteLine("---------------------------------");
                     Console.WriteLine("Please, enter a valid option: ");

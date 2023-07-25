@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Final_project.Helper
 {
-    public class SubMenu
+    public class SubMenu: MenuService
     {
         public static void ProductSubMenu() 
         {
@@ -23,20 +23,19 @@ namespace Final_project.Helper
                 Console.WriteLine("3. Delete product");
                 Console.WriteLine("4. Show  products by category");
                 Console.WriteLine("5. Show  products by price range");
-                Console.WriteLine("6. Correction on the product");
+                Console.WriteLine("6. Update product ");
                 Console.WriteLine("7. Search products by name");
-                
-                Console.WriteLine("0.  Go back");
+                Console.WriteLine("0. Go back");
 
                 Console.WriteLine("---------------------------------");
-                Console.WriteLine("Enter an option please: ");
+                Console.WriteLine("Please, select an option: ");
                 Console.WriteLine("---------------------------------");
 
-                while (int.TryParse(Console.ReadLine(), out option))
+                while (!int.TryParse(Console.ReadLine(), out option))
                 {
-                    Console.WriteLine("Invalid option");
-                    Console.WriteLine("Enter an option please: ");
-                    Console.WriteLine("---------------------------------");
+                    Console.WriteLine("-----------------------------");
+                    Console.WriteLine("Please, enter a valid option:");
+                    Console.WriteLine("-----------------------------");
                 }
                 switch (option)
                 {
@@ -56,7 +55,7 @@ namespace Final_project.Helper
                         MenuService.MenuShowProductsByPriceRnge();
                         break;
                     case 6:
-                        MenuService.MenuCorrectionProduct();
+                        MenuService.MenuUpdateProduct();
                         break;
                     case 7:
                         MenuService.MenuSearchProductsByName();
@@ -82,21 +81,21 @@ namespace Final_project.Helper
                 Console.WriteLine("2. Add sale");
                 Console.WriteLine("3. Delete sale");
                 Console.WriteLine("4. Return of any product on sale");
-                Console.WriteLine("5. Show sales by history");
+                Console.WriteLine("5. Show sales by date");
                 Console.WriteLine("6. Show sales by price range");
                 Console.WriteLine("7. Shows sales on a specific date");
                 Console.WriteLine("8. Show sales issued under ID");
-                Console.WriteLine("0.  Go back");
+                Console.WriteLine("0. Go back");
 
-                Console.WriteLine("---------------------------------");
+                Console.WriteLine("----------------------------------");
                 Console.WriteLine("Enter an option please: ");
-                Console.WriteLine("---------------------------------");
+                Console.WriteLine("------------------------------*---");
 
-                while (int.TryParse(Console.ReadLine(), out option))
+                while (!int.TryParse(Console.ReadLine(), out option))
                 {
-                    Console.WriteLine("Invalid option");
-                    Console.WriteLine("Enter an option please: ");
-                    Console.WriteLine("---------------------------------");
+                    Console.WriteLine("------------------------------");
+                    Console.WriteLine("Please, enter a valid option: ");
+                    Console.WriteLine("------------------------------");
                 }
                 switch (option)
                 {
