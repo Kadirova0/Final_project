@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\fatim\\source\\repos\\Final project\\Final project\\Shop_project.csproj",
-      "projectName": "Shop_project",
-      "projectPath": "C:\\Users\\fatim\\source\\repos\\Final project\\Final project\\Shop_project.csproj",
+      "projectUniqueName": "C:\\Users\\fatim\\OneDrive\\Masaüstü\\Final project\\Final project\\Final_project.csproj",
+      "projectName": "Final_project",
+      "projectPath": "C:\\Users\\fatim\\OneDrive\\Masaüstü\\Final project\\Final project\\Final_project.csproj",
       "packagesPath": "C:\\Users\\fatim\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\fatim\\source\\repos\\Final project\\Final project\\obj\\",
+      "outputPath": "C:\\Users\\fatim\\OneDrive\\Masaüstü\\Final project\\Final project\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

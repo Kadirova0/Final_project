@@ -1,59 +1,89 @@
-﻿using System;
-namespace Shop_project.Services.Concrete
+﻿using Final_project.Data.Models;
+using Final_project.Services.Abstract;
+using Final_project.Services.Concrete;
+using System;
+namespace Final.Services.Concrete
 {
-    public class MenuService
+    public class MenuService 
     {
-        private static ShopService ShopService = new();
+        private static ShopService ShopService;
+
+        public static void MenuAddProduct()
+        {
+            try
+            {
+
+            }
+        }
+
+        public static void MenuAddSale()
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void MenuCorrectionProduct()
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void MenuDeleteProduct()
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void MenuDeleteSale()
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void MenuReturnofAnyProductonSale()
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void MenuSearchProductsByName()
+        {
+            throw new NotImplementedException();
+        }
 
         public static void MenuShowAllProducts()
         {
-
+            throw new NotImplementedException();
         }
-        public static void MenuAddProduct()
-        {
-        }
-        public static void MenuDeleteProduct()
-        {
-        }
-        public static void MenuShowProductsByCategory()
-        {
-        }
-        public static void MenuShowProductsByPriceRnge()
-        {
-        }
-        public static void MenuCorrectionProduct()
-        {
-        }
-        public static void MenuSearchProductsByName()
-        {
-        }
-
 
         public static void MenuShowAllSales()
         {
+            throw new NotImplementedException();
+        }
 
-        }
-        public static void MenuAddSale()
+        public static void MenuShowProductsByCategory()
         {
+            throw new NotImplementedException();
         }
-        public static void MenuDeleteSale()
+
+        public static void MenuShowProductsByPriceRnge()
         {
+            throw new NotImplementedException();
         }
-        public static void MenuReturnofAnyProductonSale()
+
+        public static void MenuShowSalesByDate()
         {
+            throw new NotImplementedException();
         }
-        public static void MenuShowSalesByHistory()
-        {
-        }
+
         public static void MenuShowSalesByPriceRange()
         {
-        }
-        public static void MenuShowsSalesonSpecificDate()
-        {
-        }
-        public static void MenuShowSalesIssuedUnderId()
-        {
+            throw new NotImplementedException();
         }
 
+        public static void MenuShowSalesIssuedUnderId()
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void MenuShowSalesonSpecificDate()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

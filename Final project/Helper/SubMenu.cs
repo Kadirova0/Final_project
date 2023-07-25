@@ -1,11 +1,12 @@
-﻿using Shop_project.Services.Concrete;
+﻿using Final.Services.Concrete;
+using Final_project.Services.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shop_project.Helper
+namespace Final_project.Helper
 {
     public class SubMenu
     {
@@ -112,13 +113,13 @@ namespace Shop_project.Helper
                         MenuService.MenuReturnofAnyProductonSale();
                         break;
                     case 5:
-                        MenuService.MenuShowSalesByHistory();
+                        MenuService.MenuShowSalesByDate();
                         break;
                     case 6:
                         MenuService.MenuShowSalesByPriceRange();
                         break;
                     case 7:
-                        MenuService.MenuShowsSalesonSpecificDate();
+                        MenuService.MenuShowSalesonSpecificDate();
                         break;
                     case 8:
                         MenuService.MenuShowSalesIssuedUnderId();

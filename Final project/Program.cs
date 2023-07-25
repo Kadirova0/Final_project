@@ -1,4 +1,4 @@
-﻿using Shop_project.Helper;
+﻿using Final_project.Helper;
 using System;
 namespace Shop_project
 {
@@ -12,8 +12,8 @@ namespace Shop_project
 
             do
             {
-                Console.WriteLine("1. Operate on products");
-                Console.WriteLine("2. Operate on sales");
+                Console.WriteLine("1. Operation on products");
+                Console.WriteLine("2. Operation on sales");
                 Console.WriteLine("0. Log out");
                 Console.WriteLine("---------------------------------");
                 Console.WriteLine("Please, select an option: ");

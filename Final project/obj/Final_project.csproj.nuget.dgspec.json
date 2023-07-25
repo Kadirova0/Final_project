@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\fatim\\OneDrive\\Masaüstü\\Final project\\Final project\\Shop_project.csproj": {}
+    "C:\\Users\\fatim\\OneDrive\\Masaüstü\\Final project\\Final project\\Final_project.csproj": {}
   },
   "projects": {
-    "C:\\Users\\fatim\\OneDrive\\Masaüstü\\Final project\\Final project\\Shop_project.csproj": {
+    "C:\\Users\\fatim\\OneDrive\\Masaüstü\\Final project\\Final project\\Final_project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\fatim\\OneDrive\\Masaüstü\\Final project\\Final project\\Shop_project.csproj",
-        "projectName": "Shop_project",
-        "projectPath": "C:\\Users\\fatim\\OneDrive\\Masaüstü\\Final project\\Final project\\Shop_project.csproj",
+        "projectUniqueName": "C:\\Users\\fatim\\OneDrive\\Masaüstü\\Final project\\Final project\\Final_project.csproj",
+        "projectName": "Final_project",
+        "projectPath": "C:\\Users\\fatim\\OneDrive\\Masaüstü\\Final project\\Final project\\Final_project.csproj",
         "packagesPath": "C:\\Users\\fatim\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\fatim\\OneDrive\\Masaüstü\\Final project\\Final project\\obj\\",
         "projectStyle": "PackageReference",

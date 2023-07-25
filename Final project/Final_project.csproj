@@ -8,10 +8,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Data\Models\" />
-    <Folder Include="Data\Enums\" />
-    <Folder Include="Data\Common\" />
-  </ItemGroup>
-
 </Project>
