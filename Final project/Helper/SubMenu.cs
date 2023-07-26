@@ -109,7 +109,7 @@ namespace Final_project.Helper
                         MenuService.MenuDeleteSale();
                         break;
                     case 4:
-                        MenuService.MenuReturnofAnyProductonSale();
+                        MenuService.MenuReturnofAnyProductOnSale();
                         break;
                     case 5:
                         MenuService.MenuShowSalesByDate();
@@ -118,7 +118,7 @@ namespace Final_project.Helper
                         MenuService.MenuShowSalesByPriceRange();
                         break;
                     case 7:
-                        MenuService.MenuShowSalesonSpecificDate();
+                        MenuService.MenuShowSalesOnSpecificDate();
                         break;
                     case 8:
                         MenuService.MenuShowSalesIssuedUnderId();

@@ -4,11 +4,14 @@ using Final_project.Data.Models;
 using Final_project.Services.Abstract;
 using Final_project.Services.Concrete;
 using System;
+using System.Collections.ObjectModel;
+
 namespace Final.Services.Concrete
 {
     public class MenuService : ShopService
     {
-        private static ShopService shopService = new(); 
+        private static ShopService shopService = new();
+        private static IEnumerable<Categories> categories;
 
         public static void MenuShowAllProducts()
         {
@@ -50,15 +53,15 @@ namespace Final.Services.Concrete
              Console.WriteLine("Enter quantity: ");
             int quantity = int.Parse(Console.ReadLine());
 
-                int newId = shopService.AddProduct(name, price, category, quantity);
-                Console.WriteLine($"Product with ID {newId} was created!");
+            int newId = shopService.AddProduct(name, price, category, quantity);
+            Console.WriteLine($"Product with ID {newId} was created!");
             }
             catch (Exception ex) 
             {
                 Console.WriteLine($"Oops, error: {ex.Message}");
             }
-
         }
+
         public static void MenuDeleteProduct()
         {
             try 
@@ -74,33 +77,59 @@ namespace Final.Services.Concrete
                 Console.WriteLine($"Oops, error: {ex.Message}");
             }
         }
+
         public static void MenuShowProductsByCategory()
         {
             try
             {
-                var products = shopService.GetProducts();
-                if (products.Count == 0)
-                {
-                    Console.WriteLine("There are not product!");
-                    return;
-                }
-                var table = new ConsoleTable("Category");
+            Console.WriteLine("Available categories:");
+            
+            Console.WriteLine("Enter the category name to view products: ");
+            string selectedCategory = Console.ReadLine();
 
-                foreach (var product in products)
-                {
-                    table.AddRow(product.Category);
-                }
-                table.Write();
-            }
-            catch (Exception ex)
+            Console.WriteLine("Products in the selected category: ");
+
+            foreach (var product in products)
             {
-                Console.WriteLine($"Oops, error : {ex.Message}");
+               if (product.Category == selectedCategory)
+                {
+                    Console.WriteLine($"Id: {product.Id} | Name: {product.Name} | Price: {product.Price} | Category: {product.Category} | Quantity: {product.Quantity}");
+                }
+            }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Oops, eror: {ex.Message}");
             }
         }
+
         public static void MenuShowProductsByPriceRnge()
         {
-            throw new NotImplementedException();
+            try
+            {
+                Console.WriteLine("Enter minimum price: ");
+                decimal minPrice = decimal.Parse(Console.ReadLine());
+
+                Console.WriteLine("Enter maximum price: ");
+                decimal maxPrice = decimal.Parse(Console.ReadLine());
+
+                var foundProducts = shopService.ShowProductsByPriceRange(minPrice, maxPrice);
+                if (foundProducts.Count == 0)
+                {
+                    Console.WriteLine("No products found");
+                    return;
+                }
+                foreach (var product in foundProducts)
+                {
+                    Console.WriteLine($"Id: {product.Id} | Name: {product.Name} | Price: {product.Price} | Category: {product.Category} | Quantity: {product.Quantity}");
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Oops, error: {ex.Message}");
+            }
         }
+
         public static void MenuUpdateProduct()
         {
             try 
@@ -131,23 +160,93 @@ namespace Final.Services.Concrete
 
         public static void MenuSearchProductsByName()
         {
-            throw new NotImplementedException();
+           try
+           {
+            Console.WriteLine("Enter name for search: ");
+            string name =Console.ReadLine();
+
+            var foundProducts = shopService.SearchProductsByname(name);
+
+            if (foundProducts.Count == 0)
+            {
+                Console.WriteLine("No products found: ");
+                return;
+            }
+            foreach (var product in foundProducts)
+                {
+                    Console.WriteLine($"Id: {product.Id} | Name: {product.Name} | Price: {product.Price} | Category: {product.Category} | Quantity: {product.Quantity}");
+                }
+           }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Oops, error: {ex.Message}");
+            }
         }
 
 
         public static void MenuShowAllSales()
         {
-            throw new NotImplementedException();
+            try
+            {
+              var sales = shopService.GetSales();
+              if (sales.Count == 0)
+                {
+                  Console.WriteLine("There are not sale!");
+                  return;
+                }
+              var table = new ConsoleTable("Id", "Amount", "SaleItem", "Date");
+
+              foreach (var sale in sales)
+                {
+                  table.AddRow(sale.Id, sale.Amount, sale.SaleItem, sale.Date);
+                }
+              table.Write();
+            }
+            catch (Exception ex)
+            {
+                 Console.WriteLine($"Oops, error : {ex.Message}");
+            }
         }
+
         public static void MenuAddSale()
         {
-            throw new NotImplementedException();
+            try
+            {
+              Console.WriteLine("Get Product Id : ");
+              int productId = Convert.ToInt32(Console.ReadLine()); 
+            
+
+              Console.WriteLine("Enter amount: ");
+              int quantity = int.Parse(Console.ReadLine());
+
+              Console.WriteLine("Enter date: ");
+              DateTime date  = DateTime.Parse(Console.ReadLine());
+
+              shopService.AddSale(productId,quantity,date);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Oops, error: {ex.Message}");
+            }
+           
         }
         public static void MenuDeleteSale()
         {
-            throw new NotImplementedException();
+            try
+            {
+              Console.WriteLine("Enter sale's ID: ");
+              int id = int.Parse(Console.ReadLine());
+
+              shopService.DeleteSale(id);
+              Console.WriteLine("Sale deleted successfuly!");
+            }
+            catch (Exception ex)
+            {
+               Console.WriteLine($"Oops, error: {ex.Message}");
+            }
         }
-        public static void MenuReturnofAnyProductonSale()
+
+        public static void MenuReturnofAnyProductOnSale()
         {
             throw new NotImplementedException();
         }
@@ -159,7 +258,7 @@ namespace Final.Services.Concrete
         {
             throw new NotImplementedException();
         }
-        public static void MenuShowSalesonSpecificDate()
+        public static void MenuShowSalesOnSpecificDate()
         {
             throw new NotImplementedException();
         }
