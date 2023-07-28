@@ -13,17 +13,17 @@ namespace Final_project.Data.Models
     {
         private static int count = 0;
 
-        public Sale(decimal amount, SaleItem saleItem, DateTime date)
+        public Sale(decimal amount, List<SaleItem> saleItem, DateTime date)
         {
             Amount = amount;
-            SaleItem = saleItem;
+            SaleItem = new List<SaleItem>();
             Date = date;
 
             Id = count;
             count++;
         }
         public decimal Amount { get; set; }
-        public SaleItem SaleItem { get; set; }
+        public List<SaleItem> SaleItem { get; set; }
         public DateTime Date { get; set; }
     } 
 }

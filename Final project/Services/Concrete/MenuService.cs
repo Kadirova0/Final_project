@@ -11,7 +11,6 @@ namespace Final.Services.Concrete
     public class MenuService : ShopService
     {
         private static ShopService shopService = new();
-        private static IEnumerable<Categories> categories;
 
         public static void MenuShowAllProducts()
         {
@@ -82,20 +81,21 @@ namespace Final.Services.Concrete
         {
             try
             {
-            Console.WriteLine("Available categories:");
-            
-            Console.WriteLine("Enter the category name to view products: ");
-            string selectedCategory = Console.ReadLine();
+                var categories = shopService.GetProducts();
 
-            Console.WriteLine("Products in the selected category: ");
+               Console.WriteLine("Available categories:");
+               foreach (Categories enumValue in Enum.GetValues(typeof(Categories)))
+                {
+                    Console.WriteLine(enumValue);
+                }
 
-            foreach (var product in products)
-            {
-               if (product.Category == selectedCategory)
+               Console.WriteLine("Products in the selected category: ");
+                Categories category = (Categories)Enum.Parse(typeof(Categories), Console.ReadLine(), true);
+
+                foreach (var product in categories)
                 {
                     Console.WriteLine($"Id: {product.Id} | Name: {product.Name} | Price: {product.Price} | Category: {product.Category} | Quantity: {product.Quantity}");
                 }
-            }
             }
             catch(Exception ex)
             {
@@ -134,23 +134,23 @@ namespace Final.Services.Concrete
         {
             try 
             {
-            Console.WriteLine("Enter ID: ");
-            int id =int.Parse(Console.ReadLine());
+               Console.WriteLine("Enter ID: ");
+               int id =int.Parse(Console.ReadLine());
 
-            Console.WriteLine("Enter name: ");
-            string name = Console.ReadLine();
+               Console.WriteLine("Enter name: ");
+               string name = Console.ReadLine();
 
-            Console.WriteLine("Enter price: ");
-            decimal price = decimal.Parse(Console.ReadLine());
+               Console.WriteLine("Enter price: ");
+               decimal price = decimal.Parse(Console.ReadLine());
 
-            Console.WriteLine("Enter category: ");
-            Categories category = (Categories)Enum.Parse(typeof(Categories), Console.ReadLine(), true);
+               Console.WriteLine("Enter category: ");
+               Categories category = (Categories)Enum.Parse(typeof(Categories), Console.ReadLine(), true);
 
-            Console.WriteLine("Enter quantity: ");
-            int quantity = int.Parse(Console.ReadLine());
+               Console.WriteLine("Enter quantity: ");
+               int quantity = int.Parse(Console.ReadLine());
 
-            shopService.UpdateProduct(id, name, price, category, quantity);
-            Console.WriteLine("Update product successfuly!"); 
+               shopService.UpdateProduct(id, name, price, category, quantity);
+               Console.WriteLine("Update product successfuly!"); 
             }
             catch (Exception ex)
             {
@@ -162,27 +162,26 @@ namespace Final.Services.Concrete
         {
            try
            {
-            Console.WriteLine("Enter name for search: ");
-            string name =Console.ReadLine();
+              Console.WriteLine("Enter name for search: ");
+              string name =Console.ReadLine();
 
-            var foundProducts = shopService.SearchProductsByname(name);
+              var foundProducts = shopService.SearchProductsByName(name);
 
-            if (foundProducts.Count == 0)
-            {
+             if (foundProducts.Count == 0)
+             {
                 Console.WriteLine("No products found: ");
                 return;
-            }
-            foreach (var product in foundProducts)
+             }
+             foreach (var product in foundProducts)
                 {
                     Console.WriteLine($"Id: {product.Id} | Name: {product.Name} | Price: {product.Price} | Category: {product.Category} | Quantity: {product.Quantity}");
                 }
            }
-            catch(Exception ex)
-            {
+           catch(Exception ex)
+           {
                 Console.WriteLine($"Oops, error: {ex.Message}");
-            }
+           }
         }
-
 
         public static void MenuShowAllSales()
         {
@@ -213,23 +212,21 @@ namespace Final.Services.Concrete
             try
             {
               Console.WriteLine("Get Product Id : ");
-              int productId = Convert.ToInt32(Console.ReadLine()); 
-            
+              int productId = Convert.ToInt32(Console.ReadLine());
 
-              Console.WriteLine("Enter amount: ");
+              Console.WriteLine("Enter quantity: ");
               int quantity = int.Parse(Console.ReadLine());
-
-              Console.WriteLine("Enter date: ");
-              DateTime date  = DateTime.Parse(Console.ReadLine());
-
-              shopService.AddSale(productId,quantity,date);
+              DateTime date = DateTime.Today;
+               
+              int newId = shopService.AddSale(productId, quantity, date);
+              Console.WriteLine($"Sale with ID {newId} was created!");
             }
             catch(Exception ex)
             {
                 Console.WriteLine($"Oops, error: {ex.Message}");
             }
-           
         }
+
         public static void MenuDeleteSale()
         {
             try
@@ -252,19 +249,73 @@ namespace Final.Services.Concrete
         }
         public static void MenuShowSalesByDate()
         {
-            throw new NotImplementedException();
+            try
+            {
+                Console.WriteLine("Enter minimum date: ");
+                DateTime minDate = DateTime.Parse(Console.ReadLine());
+
+                Console.WriteLine("Enter maximum date: ");
+                DateTime maxDate = DateTime.Parse(Console.ReadLine());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Oops, error {ex.Message}");
+            }
         }
-        public static void MenuShowSalesByPriceRange()
+        public static void MenuShowSalesByAmountRange()
         {
-            throw new NotImplementedException();
+            try
+            {
+                Console.WriteLine("Enter minimum amount: ");
+                decimal minAmount = decimal.Parse(Console.ReadLine());
+
+                Console.WriteLine("Enter maximum amount: ");
+                decimal maxAmount = decimal.Parse(Console.ReadLine());
+
+                var foundSales = shopService.ShowSalesByAmountRange(minAmount, maxAmount);
+
+                if (foundSales.Count == 0)
+                {
+                    Console.WriteLine("No sales found");
+                    return;
+                }
+              
+                foreach (var sale in foundSales)
+                {
+                    Console.WriteLine($"Id: {sale.Id} | SaleItem: {sale.SaleItem} | Date: {sale.Date}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Oops, error: {ex.Message}");
+            }
         }
         public static void MenuShowSalesOnSpecificDate()
         {
-            throw new NotImplementedException();
+            try
+            {
+                Console.WriteLine("Enter date: ");
+                DateTime date = DateTime.Parse(Console.ReadLine());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Oops, error: {ex.Message}");
+            }
+            
         }
-        public static void MenuShowSalesIssuedUnderId()
+        public static void MenuFindSalesByGivenId()
         {
-            throw new NotImplementedException();
+            try
+            {
+                Console.WriteLine("Enter sale's ID: ");
+                int id = int.Parse(Console.ReadLine());
+
+                shopService.FindSalesByGivenId(id);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Oops, error: {ex.Message}");
+            }
         }
     }
 }
