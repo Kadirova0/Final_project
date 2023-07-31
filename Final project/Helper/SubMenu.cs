@@ -89,7 +89,7 @@ namespace Final_project.Helper
 
                 Console.WriteLine("----------------------------------");
                 Console.WriteLine("Enter an option please: ");
-                Console.WriteLine("------------------------------*---");
+                Console.WriteLine("----------------------------------");
 
                 while (!int.TryParse(Console.ReadLine(), out option))
                 {

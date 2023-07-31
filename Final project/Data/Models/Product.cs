@@ -26,6 +26,5 @@ namespace Final_project.Data.Models
         public decimal Price { get; set; }
         public Categories Category { get; set; }
         public int Quantity { get; set; }
-        
     }
 }

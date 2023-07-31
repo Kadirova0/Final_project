@@ -18,11 +18,11 @@ namespace Final_project.Services.Abstract
         List<Product> SearchProductsByName(string name);
 
         public List<Sale> GetSales();
-        public int AddSale(int productId, int quantity, DateTime date);
+        public void AddSale(int productId, int quantity, DateTime date);
         public void DeleteSale(int id);
-        List<Sale> ReturnReturnofAnyProductOnSale();
+        List<Sale> ReturnofAnyProductOnSale(int saleId, int productId, int quantity);
         List<Sale> ShowSalesByAmountRange(decimal minAmount, decimal maxAmount);
         List<Sale> ShowSalesOnSpecificDate(DateTime date);
-        public void FindSalesByGivenId(int id);
+        List<Sale> FindSalesByGivenId(int id);
     }
 }

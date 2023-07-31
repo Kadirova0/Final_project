@@ -32,9 +32,9 @@ namespace Final_project.Services.Concrete
 
         public ShopService() 
         {
-            products = new();
-            sales = new();
-            saleItems = new();
+            products = new List<Product>();
+            sales = new List<Sale>();
+            saleItems = new List<SaleItem>();
         }
 
         public int AddProduct(string name, decimal price, Categories category, int quantity)
@@ -86,11 +86,11 @@ namespace Final_project.Services.Concrete
         }
 
         
-        public int AddSale(int productId, int quantity, DateTime date)
+        public void AddSale(int productId, int quantity, DateTime date)
         {
             List<SaleItem> saleItems = new();
             var product = products.Find(x => x.Id == productId);
-
+            if (product.Quantity < quantity) throw new Exception("not enough product instock:");
             if (quantity < 0) throw new Exception("Quantity can't be negative!");
             if (product != null && product.Quantity >= quantity) 
             {
@@ -106,8 +106,8 @@ namespace Final_project.Services.Concrete
                 sales.Add(sale);
 
                 int option;
-                do
-                {
+               do
+               {
                     Console.WriteLine(" Do you want to add another sales item? ");
                     Console.WriteLine("1. Yes");
                     Console.WriteLine("2. No");
@@ -117,10 +117,38 @@ namespace Final_project.Services.Concrete
                         Console.WriteLine("Invalid option!");
                         Console.WriteLine("Enter option again:");
                     }
-                } while (option != 2);
+                    switch(option)
+                    {
+                        case 1:
+                            Console.WriteLine("Add product ID for sale: ");
+                            int salesID = int.Parse(Console.ReadLine());
+
+                            Console.WriteLine("Enter quantity:");
+                            int secondQuantity = int.Parse(Console.ReadLine());
+
+                            var newProduct = products.Find(x => x.Id == salesID);
+                            var secondSum = product.Price * secondQuantity;
+                            newProduct.Quantity -= secondQuantity;
+
+                            var newSaleItem = new SaleItem(newProduct, secondQuantity);
+                            saleItems.Add(newSaleItem);
+                            sale = new Sale(secondSum, secondQuantity, DateTime.Today);
+                        foreach(var item in saleItems) 
+                        {
+                            sale.AddSaleItem(item);
+                        }
+                            sales.Add(sale);
+                        break;
+
+                        case 2:
+                            return;
+                        default:
+                            Console.WriteLine("No such option!");
+                        break;
+                    }
+               } while (option != 2);
             }
-            return sales.Count;
-        }
+         }
 
         public void DeleteSale(int id)
         {
@@ -136,29 +164,54 @@ namespace Final_project.Services.Concrete
             return sales.Where(x => x.Amount >= minAmount && x.Amount <= maxAmount).ToList();
         }
 
-       
-
-        public List<Sale> ReturnReturnofAnyProductOnSale()
-        {
-            throw new NotImplementedException();
-        }
-
         public List<Sale> ShowSalesByDate(DateTime minDate, DateTime maxDate)
         {
-            if (minDate > maxDate) throw new Exception("Min date can't be more than Max date!");
+            if (minDate > maxDate) throw new Exception("Min date can't be mor than max date!");
             return sales.Where(x => x.Date >= minDate && x.Date <= maxDate).ToList();
         }
 
         public List<Sale> ShowSalesOnSpecificDate(DateTime date)
         {
-            if (date != DateTime.Now) throw new Exception("No sales found for this date!");
+            if (date != DateTime.Today) throw new Exception("No sales on this date!");
             return sales.Where(x =>x.Date == date).ToList();
         }
 
-        public void FindSalesByGivenId(int id)
+        public List<Sale> ReturnofAnyProductOnSale(int saleId, int productId, int quantity)
         {
-            if (id < 0) throw new Exception("ID can't be negative!");
-            int saleIndex = sales.FindIndex(x => x.Id == id);
+            if (saleId < 0) throw new ArgumentException("Sale ID can't be less than 0.", nameof(saleId));
+            if (productId < 0) throw new ArgumentException("Product ID can't be less than 0.", nameof(productId));
+            if (quantity <= 0) throw new ArgumentException("Quantity must be greater than 0.", nameof(quantity));
+
+            var sale = sales.FirstOrDefault(s => s.Id == saleId);
+            if (sale == null) throw new ArgumentException($"No sale found with ID: {saleId}");
+
+            var saleItem = sale.SaleItem.FirstOrDefault(item => item.Product.Id == productId);
+            if (saleItem == null) throw new ArgumentException($"Product with ID: {productId} not found in sale with ID: {saleId}");
+
+            if (quantity > saleItem.Quantity) throw new ArgumentException("Quantity to return exceeds the quantity sold in the sale.");
+
+            var product = products.FirstOrDefault(p => p.Id == productId);
+            if (product == null) throw new ArgumentException($"Product with ID: {productId} not found in the list of products.");
+
+            product.Quantity += quantity;
+            saleItem.Quantity -= quantity;
+
+            Console.WriteLine($"Product with ID: {productId} returned from sale with ID: {saleId}.");
+            return sales;
+        }
+
+        public List<Sale> FindSalesByGivenId(int id)
+        {
+            if (id < 0) throw new Exception("ID can't be less than 0!");
+
+            var salesList = sales.Where(sale => sale.Id == id).ToList();
+
+            if (salesList.Count == 0)
+            {
+                Console.WriteLine($"No sale found with the given ID: {id}");
+            }
+
+            return salesList;
         }
     }  
 }

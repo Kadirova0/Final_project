@@ -5,6 +5,7 @@ using Final_project.Services.Abstract;
 using Final_project.Services.Concrete;
 using System;
 using System.Collections.ObjectModel;
+using System.Xml.Linq;
 
 namespace Final.Services.Concrete
 {
@@ -16,7 +17,7 @@ namespace Final.Services.Concrete
         {
           try
           {
-           var products = shopService.GetProducts();
+           var products = shopService.GetProducts(); 
             if (products.Count ==0)
             {
                 Console.WriteLine("There are not product!");
@@ -189,17 +190,16 @@ namespace Final.Services.Concrete
             {
               var sales = shopService.GetSales();
               if (sales.Count == 0)
-                {
+              {
                   Console.WriteLine("There are not sale!");
                   return;
-                }
-              var table = new ConsoleTable("Id", "Amount", "SaleItem", "Date");
-
+              }
+                var table = new ConsoleTable("ID", "Amount", "Quantity", "Date", "SaleItem");
               foreach (var sale in sales)
-                {
-                  table.AddRow(sale.Id, sale.Amount, sale.SaleItem, sale.Date);
-                }
-              table.Write();
+              {
+                 table.AddRow(sale.Id, sale.Amount, sale.Quantity, sale.Date, sale.ToString());
+              }
+                table.Write();
             }
             catch (Exception ex)
             {
@@ -212,14 +212,13 @@ namespace Final.Services.Concrete
             try
             {
               Console.WriteLine("Get Product Id : ");
-              int productId = Convert.ToInt32(Console.ReadLine());
+              int productId =int.Parse(Console.ReadLine());
 
               Console.WriteLine("Enter quantity: ");
               int quantity = int.Parse(Console.ReadLine());
+              
               DateTime date = DateTime.Today;
-               
-              int newId = shopService.AddSale(productId, quantity, date);
-              Console.WriteLine($"Sale with ID {newId} was created!");
+              shopService.AddSale(productId, quantity, date);
             }
             catch(Exception ex)
             {
@@ -245,8 +244,26 @@ namespace Final.Services.Concrete
 
         public static void MenuReturnofAnyProductOnSale()
         {
-            throw new NotImplementedException();
+            try
+            {
+                Console.WriteLine("Enter sale ID: ");
+                int saleId = int.Parse(Console.ReadLine());
+
+                Console.WriteLine("Enter the product ID to be removed: ");
+                int productId = int.Parse(Console.ReadLine());
+
+                Console.WriteLine("Enter the quantity of products to be removed: ");
+                int quantity = int.Parse(Console.ReadLine());
+
+                shopService.ReturnofAnyProductOnSale(saleId, productId, quantity);
+                Console.WriteLine("Product returned successfuly!");
+            }
+            catch( Exception ex)
+            {
+                Console.WriteLine($"Oops, error: {ex.Message}");
+            }
         }
+
         public static void MenuShowSalesByDate()
         {
             try
@@ -256,6 +273,8 @@ namespace Final.Services.Concrete
 
                 Console.WriteLine("Enter maximum date: ");
                 DateTime maxDate = DateTime.Parse(Console.ReadLine());
+
+                shopService.ShowSalesByDate(minDate, maxDate);
             }
             catch (Exception ex)
             {
@@ -290,6 +309,7 @@ namespace Final.Services.Concrete
                 Console.WriteLine($"Oops, error: {ex.Message}");
             }
         }
+
         public static void MenuShowSalesOnSpecificDate()
         {
             try
@@ -307,63 +327,31 @@ namespace Final.Services.Concrete
         {
             try
             {
-                Console.WriteLine("Enter sale's ID: ");
+                Console.WriteLine("Enter Sale's ID for search:");
                 int id = int.Parse(Console.ReadLine());
 
-                shopService.FindSalesByGivenId(id);
+                var foundSale = shopService.FindSalesByGivenId(id);
+
+                if (foundSale.Count == 0)
+                {
+                    Console.WriteLine("No sales found.");
+                    return;
+                }
+                var table = new ConsoleTable("Id", "Amount", "Date", "SaleItem");
+                foreach (var sale in foundSale)
+                {
+                    table.AddRow(sale.Id, sale.Amount, sale.Date, sale.ToString());
+                }
+                table.Write();
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Oops, error: {ex.Message}");
+                Console.WriteLine($"OOPS, got an error!{ex.Message}");
             }
         }
     }
 }
+
         
         
-            /*
-             
-            public static void ShopSales()
-            {
-            }
-            public static void ShopProduct()
-            {
-            }
-            public static void ShopAddSale()
-            {
-            }
-            public static void ShopReturnofAnyProductonSale()
-            {
-            }
-            public static void ShopReturnofGeneralSale()
-            {
-            }
-            public static void ShophowSalesByDate()
-            {
-            }
-            public static void ShopShowSalesonSpecificDate()
-            {
-            }
-            public static void ShopShowSalesByPriceRange()
-            {
-            }
-            public static void ShopShowSalesIssuedUnderId()
-            {
-            }
-            public static void ShopAddProduct()
-            {
-            }
-            public static void ShopUpdateProduct()
-            {
-            }
-            public static void ShopShowProductsByCategory()
-            {
-            }
-            public static void ShopShowProductsByPriceRnge()
-            {
-            }
-            public static void ShopSearchProductsByName()
-            {
-            }
-       */
 
