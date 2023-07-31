@@ -3,6 +3,7 @@ using Final_project.Data.Enums;
 using Final_project.Data.Models;
 using Final_project.Services.Abstract;
 using Final_project.Services.Concrete;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.ObjectModel;
 using System.Xml.Linq;
@@ -195,10 +196,10 @@ namespace Final.Services.Concrete
                   Console.WriteLine("There are not sale!");
                   return;
               }
-                var table = new ConsoleTable("ID", "Amount", "Quantity", "Date", "SaleItem");
+                var table = new ConsoleTable("ID", "Amount", "Quantity", "Date");
               foreach (var sale in sales)
               {
-                 table.AddRow(sale.Id, sale.Amount, sale.Quantity, sale.Date, sale.ToString());
+                 table.AddRow(sale.Id, sale.Amount, sale.Quantity, sale.Date);
               }
                 table.Write();
             }
@@ -265,7 +266,7 @@ namespace Final.Services.Concrete
             }
         }
 
-        public static void MenuShowSalesByDate() //Display of sales between two dates received from the user
+        public static void MenuShowSalesByDateRange() //Display of sales between two dates received from the user
         {
             try
             {
@@ -275,11 +276,22 @@ namespace Final.Services.Concrete
                 Console.WriteLine("Enter maximum date: ");
                 DateTime maxDate = DateTime.Parse(Console.ReadLine());
 
-                shopService.ShowSalesByDate(minDate, maxDate);
+                shopService.ShowSalesByDateRange(minDate, maxDate);
+                var saleRange = shopService.ShowSalesByDateRange(minDate, maxDate);
+                if (saleRange.Count == 0) throw new Exception("No sales found!");
+                else
+                {
+                    var table = new ConsoleTable("ID", "Amount", "DateTime", "SaleItems");
+                    foreach (var sale in saleRange)
+                    {
+                        table.AddRow(sale.Id, sale.Amount, sale.Date, sale.ToString()); // Use ToString() here
+                    }
+                    table.Write();
+                }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Oops, error {ex.Message}");
+                Console.WriteLine($"OOPS, got an error!{ex.Message}");
             }
         }
         public static void MenuShowSalesByAmountRange()
@@ -311,12 +323,21 @@ namespace Final.Services.Concrete
             }
         }
 
-        public static void MenuShowSalesOnSpecificDate()
+        public static void MenuShowSalesByGivenDate()
         {
             try
             {
                 Console.WriteLine("Enter date: ");
                 DateTime date = DateTime.Parse(Console.ReadLine());
+
+                var foundSales = shopService.ShowSalesByGivenDate(date);
+                if (foundSales.Count == 0) throw new Exception($"No sales found by date!");
+                var table =new ConsoleTable("Id", "Amount", "Date", "SaleItem");
+                foreach (var sale in foundSales)
+                {
+                    table.AddRow(sale.Id, sale.Amount, sale.Date, sale.ToString());
+                }
+                table.Write();
             }
             catch (Exception ex)
             {

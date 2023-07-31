@@ -94,21 +94,22 @@ namespace Final_project.Services.Concrete
             //adding the product from the warehouse to the sale
             List<SaleItem> saleItems = new();
             var product = products.Find(x => x.Id == productId);
-            if (product.Quantity < quantity) throw new Exception("not enough product instock:");
+            if (product.Quantity < quantity) throw new Exception("not enough product instock:"); //Check if there is enough quantity available for the sale
             if (quantity < 0) throw new Exception("Quantity can't be negative!");
             if (product != null && product.Quantity >= quantity) 
             {
                 var saleItem = new SaleItem(product, quantity);
                 saleItems.Add(saleItem);
-                var sum = product.Price * quantity;
-                product.Quantity -= quantity;
+                var sum = product.Price * quantity;//calculates the price for the products in the list
+                product.Quantity -= quantity; //Update the item's quantity in the market
                 var sale = new Sale(sum, quantity, DateTime.Today);
                 foreach (var item in saleItems)
                 {
-                   
+                    
                 }
                 sales.Add(sale);
-
+                Console.WriteLine("Product was successfully added to the sale.");
+               
                 int option;
                do
                {
@@ -131,26 +132,26 @@ namespace Final_project.Services.Concrete
                             int secondQuantity = int.Parse(Console.ReadLine());
 
                             var newProduct = products.Find(x => x.Id == salesID);
-                            var secondSum = product.Price * secondQuantity;
+                            var secondSum = newProduct.Price * secondQuantity;
                             newProduct.Quantity -= secondQuantity;
 
                             var newSaleItem = new SaleItem(newProduct, secondQuantity);
                             saleItems.Add(newSaleItem);
                             sale = new Sale(secondSum, secondQuantity, DateTime.Today);
-                        foreach(var item in saleItems) 
-                        {
-                            sale.AddSaleItem(item);
-                        }
+                            foreach(var item in saleItems)
+                            {
+                                sale.AddSaleItem(item);
+                            }
                             sales.Add(sale);
-                        break;
 
+                        break;
                         case 2:
                             return;
                         default:
                             Console.WriteLine("No such option!");
                         break;
                     }
-               } while (option != 2);
+               } while (option != 2); 
             }
          }
 
@@ -168,13 +169,13 @@ namespace Final_project.Services.Concrete
             return sales.Where(x => x.Amount >= minAmount && x.Amount <= maxAmount).ToList();
         }
 
-        public List<Sale> ShowSalesByDate(DateTime minDate, DateTime maxDate)
+        public List<Sale> ShowSalesByDateRange(DateTime minDate, DateTime maxDate)
         {
             if (minDate > maxDate) throw new Exception("Min date can't be mor than max date!");
             return sales.Where(x => x.Date >= minDate && x.Date <= maxDate).ToList();
         }
 
-        public List<Sale> ShowSalesOnSpecificDate(DateTime date)
+        public List<Sale> ShowSalesByGivenDate(DateTime date)
         {
             if (date != DateTime.Today) throw new Exception("No sales on this date!");
             return sales.Where(x =>x.Date == date).ToList();

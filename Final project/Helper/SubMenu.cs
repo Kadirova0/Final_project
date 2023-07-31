@@ -83,7 +83,7 @@ namespace Final_project.Helper
                 Console.WriteLine("4. Return of any product on sale");
                 Console.WriteLine("5. Show sales by date");
                 Console.WriteLine("6. Show sales by amount range");
-                Console.WriteLine("7. Shows sales on a specific date");
+                Console.WriteLine("7. Shows sales by given date");
                 Console.WriteLine("8. Find sales by given Id");
                 Console.WriteLine("0. Go back");
 
@@ -112,13 +112,13 @@ namespace Final_project.Helper
                         MenuService.MenuReturnofAnyProductOnSale();
                         break;
                     case 5:
-                        MenuService.MenuShowSalesByDate();
+                        MenuService.MenuShowSalesByDateRange();
                         break;
                     case 6:
                         MenuService.MenuShowSalesByAmountRange();
                         break;
                     case 7:
-                        MenuService.MenuShowSalesOnSpecificDate();
+                        MenuService.MenuShowSalesByGivenDate();
                         break;
                     case 8:
                         MenuService.MenuFindSalesByGivenId();

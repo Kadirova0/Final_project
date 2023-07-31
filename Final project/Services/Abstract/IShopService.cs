@@ -22,7 +22,8 @@ namespace Final_project.Services.Abstract
         public void DeleteSale(int id);
         List<Sale> ReturnofAnyProductOnSale(int saleId, int productId, int quantity);
         List<Sale> ShowSalesByAmountRange(decimal minAmount, decimal maxAmount);
-        List<Sale> ShowSalesOnSpecificDate(DateTime date);
+        List<Sale> ShowSalesByDateRange(DateTime minDate, DateTime maxDate);
+        List<Sale> ShowSalesByGivenDate(DateTime date);
         List<Sale> FindSalesByGivenId(int id);
     }
 }
