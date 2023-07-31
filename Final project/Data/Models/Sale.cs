@@ -46,7 +46,8 @@ namespace Final_project.Data.Models
 
         public override string ToString()
         {
-            return string.Join(", ", SaleItem.Select(item => item.Product));
+            return string.Join(", ", SaleItem.Select(item => item.Product)); //showing the saleitem
+
         }
     } 
 

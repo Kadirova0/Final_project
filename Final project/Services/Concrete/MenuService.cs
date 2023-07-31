@@ -37,7 +37,7 @@ namespace Final.Services.Concrete
             }
         }
 
-        public static void MenuAddProduct()
+        public static void MenuAddProduct() //The user must enter the necessary information to create a new product
         {
             try
             {
@@ -62,7 +62,7 @@ namespace Final.Services.Concrete
             }
         }
 
-        public static void MenuDeleteProduct()
+        public static void MenuDeleteProduct() ////Product deletion by id
         {
             try 
             { 
@@ -78,7 +78,8 @@ namespace Final.Services.Concrete
             }
         }
 
-        public static void MenuShowProductsByCategory()
+        public static void MenuShowProductsByCategory()//The available categories will be displayed to the user and he has to select between them and all the products from the selected category will be displayed.
+
         {
             try
             {
@@ -207,7 +208,7 @@ namespace Final.Services.Concrete
             }
         }
 
-        public static void MenuAddSale()
+        public static void MenuAddSale() //the user is asked to enter the necessary information to create a sale
         {
             try
             {
@@ -226,7 +227,7 @@ namespace Final.Services.Concrete
             }
         }
 
-        public static void MenuDeleteSale()
+        public static void MenuDeleteSale() //ID-basically delete the sale
         {
             try
             {
@@ -264,7 +265,7 @@ namespace Final.Services.Concrete
             }
         }
 
-        public static void MenuShowSalesByDate()
+        public static void MenuShowSalesByDate() //Display of sales between two dates received from the user
         {
             try
             {
@@ -323,7 +324,8 @@ namespace Final.Services.Concrete
             }
             
         }
-        public static void MenuFindSalesByGivenId()
+        public static void MenuFindSalesByGivenId() //showing sales about the received ID
+
         {
             try
             {

@@ -17,15 +17,15 @@ namespace Final_project.Services.Concrete
         private List<SaleItem> saleItems;
        
 
-        public List<Product> GetProducts() 
+        public List<Product> GetProducts() //for getting product list
         { 
            return products; 
         } 
-        public List<Sale> GetSales() 
+        public List<Sale> GetSales() //for getting sale list
         { 
            return sales;
         }
-        public List <SaleItem> GetSaleItems()
+        public List <SaleItem> GetSaleItems()// for getting saleItem list
         { 
            return saleItems;
         }
@@ -39,6 +39,7 @@ namespace Final_project.Services.Concrete
 
         public int AddProduct(string name, decimal price, Categories category, int quantity)
         {
+            //exception checking
             if (string.IsNullOrWhiteSpace(name)) throw new Exception("Name is null!");
             if (price < 0) throw new Exception("Price is negative!");
             if (quantity < 0) throw new Exception("Quantity is negative");
@@ -52,6 +53,7 @@ namespace Final_project.Services.Concrete
 
         public void DeleteProduct(int id)
         {
+            //Product deletion by id
             if (id < 0) throw new Exception("Id is negative!");
             int productIndex = products.FindIndex(x => x.Id == id);
             if (productIndex == -1) throw new Exception("Product not found");
@@ -66,6 +68,7 @@ namespace Final_project.Services.Concrete
 
         public void UpdateProduct(int id, string name, decimal price, Categories category, int quantity)
         {
+            //existing product update
             if (string.IsNullOrWhiteSpace(name)) throw new Exception("Name can't be empty!");
             if (price < 0) throw new Exception("Price can't be negative!");
             if (quantity < 0) throw new Exception("Quantity can't negative!");
@@ -88,6 +91,7 @@ namespace Final_project.Services.Concrete
         
         public void AddSale(int productId, int quantity, DateTime date)
         {
+            //adding the product from the warehouse to the sale
             List<SaleItem> saleItems = new();
             var product = products.Find(x => x.Id == productId);
             if (product.Quantity < quantity) throw new Exception("not enough product instock:");
@@ -174,6 +178,7 @@ namespace Final_project.Services.Concrete
         {
             if (date != DateTime.Today) throw new Exception("No sales on this date!");
             return sales.Where(x =>x.Date == date).ToList();
+            //showing the sale on the given date
         }
 
         public List<Sale> ReturnofAnyProductOnSale(int saleId, int productId, int quantity)
